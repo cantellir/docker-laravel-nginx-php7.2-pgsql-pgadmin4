@@ -1,4 +1,4 @@
-# Docker for Laravel (docker-nginx-php7.2-pgsql-pgadmin)
+# Docker for Laravel (docker-nginx-php7.2-pgsql-pgadmin4)
 
 Docker environment with NGINX, PHP 7.2 (with XDebug), PgSQL and PgAdmin4
 
