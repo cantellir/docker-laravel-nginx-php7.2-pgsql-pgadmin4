@@ -1,0 +1,36 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: myapp-postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=myappbd
+    ports:
+      - "5050:5432"
+
+  webserver:
+    image: nginx:alpine
+    container_name: myapp-nginx
+    volumes:
+      - ./docker-files/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+
+  php-fpm:
+    build: docker-files/php-fpm
+    container_name: myapp-php
+    working_dir: /var/www/html
+    volumes:
+      - ./backend:/var/www/html
+      - ./docker-files/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+  pgadmin:
+    image: fenglc/pgadmin4
+    container_name: myapp-pgadmin
+    ports:
+      - "6060:5050"
